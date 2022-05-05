@@ -53,7 +53,7 @@ class Employe
     private $dateEmbauche;
 
     /**
-     * @ORM\ManyToOne(targetEntity=entreprise::class, inversedBy="employes")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="employes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $entreprise;
@@ -174,5 +174,10 @@ class Employe
         $this->nbEnfants = $nbEnfants;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+      return $this-> prenom.' '.$this->nom;  
     }
 }

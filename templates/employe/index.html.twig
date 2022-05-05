@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EmployeController!{% endblock %}
+{% block title %}liste des employe
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<h1>Liste des employes</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<a href="{{ path('add_employe')}}"> Ajouter un employé</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/SymfonyEntreprise/src/Controller/EmployeController.php'|file_link(0) }}">src/Controller/EmployeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/SymfonyEntreprise/templates/employe/index.html.twig'|file_link(0) }}">templates/employe/index.html.twig</a></code></li>
-    </ul>
-</div>
+	{% if employes | length > 0 %}
+
+		<p>
+			Il y a
+			{{ employes | length}}
+			employés
+		</p>
+
+		{% for employe in employes %}
+		 <a href="{{ path('show_employe', {'id': employe.id}) }}">
+		 {{ employe}}</a> {{ '(' ~ employe.entreprise~ ')' ~ ' ' ~ employe.dateEmbauche | date('d/m/Y')}}
+		 <a href="{{ path('delete_employe', {'id' : employe.id})}}">supprimer</a> <a href="{{ path('update_employe', {'id' : employe.id}) }}">Editer</a>	<br>
+		{% endfor %}
+	{% else %}
+		<p>Il n'y a pas d'employés</p>
+	{% endif %}
+
 {% endblock %}

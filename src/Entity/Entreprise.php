@@ -124,6 +124,10 @@ class Entreprise
         return $this;
     }
 
+    public function getAdresseComplete(){
+        return $this->adresse." ".$this->cp." ".$this->ville;  
+    }
+
     public function getDateCreation(): ?\DateTimeInterface
     {
         return $this->dateCreation;
@@ -164,5 +168,10 @@ class Entreprise
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+      return $this-> raisonSociale;  
     }
 }
